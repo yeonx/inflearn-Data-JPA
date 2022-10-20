@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public interface MemberRepository extends JpaRepository<Member, Long>, MemberRepositoryCustom {
+public interface MemberRepository extends JpaRepository<Member, Long>, MemberRepositoryCustom, JpaSpecificationExecutor<Member> {
 
     // username 과 age가 and조건으로 묶이고 GreaterThan 파라미터 조건보다 크면 -> 알아서 알아 듣는다. -> 문법 틀리면 안된다.
     List<Member> findByUsernameAndAgeGreaterThan(String username, int age);
