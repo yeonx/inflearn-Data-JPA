@@ -264,4 +264,31 @@ class MemberRepositoryTest {
             System.out.println("member.team = " + member.getTeam().getName()); // team의 이름을 가져오기 위해 쿼리 날림
         }
     }
+
+    @Test
+    public void queryHint(){
+        //given
+        Member member1 = memberRepository.save(new Member("member1", 10));
+        em.flush();
+        em.clear();
+
+        //when
+        Member findMember = memberRepository.findReadOnlyByUsername("member1");
+        findMember.setUsername("member2");
+
+        em.flush();
+    }
+
+    @Test
+    public void lock(){
+        //given
+        Member member1 = memberRepository.save(new Member("member1", 10));
+        em.flush();
+        em.clear();
+
+        //when
+        List<Member> result = memberRepository.findLockByUsername("member1");
+
+    }
+
 }
